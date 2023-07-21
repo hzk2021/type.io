@@ -1,9 +1,12 @@
+'use client';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faKeyboard, faCrown, faUser, faT } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import Link from 'next/link';
 
 function Navbar() {
+  
   return (
     <nav className='flex w-full mt-2 mb-16 pt-3 gap-5 items-center justify-center flex-wrap sm:justify-between'>
         <div className='flex gap-3 text-lg'>

@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import Head from 'next/head';
 import Navbar from '@components/Navbar';
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import PreferenceProvider from '@providers/PreferenceProvider';
 
 import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
@@ -24,8 +25,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} text-gray-500 bg-gray-900`}>
         <main className='app'>
-          <Navbar />
-          {children}
+          <PreferenceProvider>
+            <Navbar />
+            {children}
+          </PreferenceProvider>
 
         </main>
       </body>

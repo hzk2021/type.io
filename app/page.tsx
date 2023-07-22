@@ -1,11 +1,14 @@
-import { PreferenceContext } from '@context/PreferenceContext';
+import TypingGame from '@components/TypingGame';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function HomePlay() {
+export default function Game() {
+
   return (
-    <div>
-      Home
-    </div>
+    <>
+      <section className='game w-full'>
+        <TypingGame/>
+      </section>
+    </>
   );
 }

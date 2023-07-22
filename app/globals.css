@@ -10,6 +10,10 @@
   @apply relative z-10 flex justify-center items-center flex-col max-w-5xl mx-auto sm:px-16 px-6;
 }
 
+.gameboard {
+  @apply w-full bg-inherit
+}
+
 .active {
   @apply text-white
 }

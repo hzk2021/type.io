@@ -6,7 +6,7 @@ type preferenceDefinition = {
 };
 
 interface preferenceContextProps extends preferenceDefinition{
-    setPreference : Function
+    setPreference : React.Dispatch<React.SetStateAction<preferenceDefinition>>
 }
 
 const PreferenceContext = createContext<preferenceContextProps | null>(null);

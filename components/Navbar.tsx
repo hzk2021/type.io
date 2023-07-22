@@ -6,10 +6,9 @@ import React from 'react';
 import Link from 'next/link';
 
 function Navbar() {
-  
   return (
     <nav className='flex w-full mt-2 mb-16 pt-3 gap-5 items-center justify-center flex-wrap sm:justify-between'>
-        <div className='flex gap-3 text-lg'>
+        <div className='flex gap-4 text-lg'>
           <Link href="/" title='Play'>
             <FontAwesomeIcon icon={faT} inverse size='lg'/>ype.io
           </Link>

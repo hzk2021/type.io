@@ -1,8 +1,9 @@
 import { createContext } from "react";
 
 type preferenceDefinition = {
-    wordType : "words" | "sentences" | "numbers",
-    time : number
+    wordType : "random" | "sentences" | "numbers",
+    time: number,
+    words : number
 };
 
 interface preferenceContextProps extends preferenceDefinition{

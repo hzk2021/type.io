@@ -5,12 +5,13 @@ import {PreferenceContext, preferenceDefinition} from '@context/PreferenceContex
 
 function PreferenceProvider({children} : {children : React.ReactNode}) {
   const [preference, setPreference] = useState<preferenceDefinition>({
-    wordType: 'words',
-    time: 60
+    wordType: 'random',
+    time: 60,
+    words: 15
   });
 
   return (
-    <PreferenceContext.Provider value={{wordType: preference.wordType, time: preference.time, setPreference}}>
+    <PreferenceContext.Provider value={{wordType: preference.wordType, time:preference.time,  words: preference.words, setPreference}}>
         {children}
     </PreferenceContext.Provider>
   );

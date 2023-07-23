@@ -24,7 +24,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} text-gray-500 bg-gray-900`}>
+      <body className={`${inter.className} text-gray-500 bg-gray-900 min-w-[350px]`}>
         <main className='app'>
           <MaterialThemeProvider>
             <PreferenceProvider>

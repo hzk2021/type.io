@@ -7,8 +7,6 @@ import { sentence } from 'txtgen';
 import { text } from '@fortawesome/fontawesome-svg-core';
 import Word from './Word';
 
-const NUMBER_OF_WORDS = 200;
-
 function TypingGame() {
   const preference = useContext(PreferenceContext);
 
@@ -23,12 +21,12 @@ function TypingGame() {
   const textInputRef = useRef<HTMLInputElement>(null);
 
   const generateWords = useCallback(() => {
-    return generate(NUMBER_OF_WORDS);
-  }, []);
+    return generate(preference!.words);
+  }, [preference]);
 
   const generateNumber = useCallback(() => {
-    return new Array(NUMBER_OF_WORDS).fill(0).map(() => Math.floor(Math.random() * 9999999).toString());
-  }, []);
+    return new Array(preference!.words).fill(0).map(() => Math.floor(Math.random() * 9999999).toString());
+  }, [preference]);
 
   const generateSentence = useCallback(() => {
     const sen = sentence().concat(` ${sentence()}`)
@@ -43,8 +41,8 @@ function TypingGame() {
                           .concat(` ${sentence()}`)
                           .concat(` ${sentence()}`);
     const char = sen.split(" ");
-    return new Array(NUMBER_OF_WORDS).fill(0).map((c, i) => char[i]);
-  }, []);
+    return new Array(preference!.words).fill(0).map((c, i) => char[i]);
+  }, [preference]);
 
 //   const registerKeyDownEvents = useCallback(() => {
 //     if (typeof window !== "undefined") {
@@ -135,7 +133,7 @@ function TypingGame() {
 
     if (gameOver) {
       switch (preference?.wordType) {
-        case "words":
+        case "random":
           setTexts(generateWords());
           break;
         case "numbers":
@@ -145,7 +143,6 @@ function TypingGame() {
           setTexts(generateSentence());
           break;
       };
-  
       // setTimeLeft(preference!.time);
     }
 
@@ -155,9 +152,14 @@ function TypingGame() {
 
   return (
     <>
-        <p>
-            {timeLeft}
-            {/* {!gameOver ? timeLeft : null} */}
+      <div>
+
+        {!gameOver && <h1>{timeLeft}</h1>}
+        <p className={`text-sm md:text-base transition-all duration-7 ${(typeof window !== "undefined") ? (
+                                                                        !(document.activeElement === textInputRef.current)
+                                                                        ? 'blur-lg' 
+                                                                        : '' ) : null}`
+                      }>
             {
                 !gameOver ?
                 texts.map((text, index) => {
@@ -167,19 +169,27 @@ function TypingGame() {
                               active={index === currentWordIndex}
                               correct={correctWords[index]}/>
                     );
-                }) : <span>
-                    wpm {wpm} 
-                    accuracy: { ((correctWords.filter(w => w === true).length / correctWords.length) * 100).toFixed(2) }%
-                    </span>
+                }) : ''
             }
         </p>
-
+        
+        {
+          gameOver && texts ?
+          <span>
+            wpm {wpm} 
+            accuracy: { ((correctWords.filter(w => w === true).length / correctWords.length) * 100).toFixed(2) }%
+          </span> : null
+        }
+        
+      </div>
+        
         <input 
             ref={textInputRef}
             type="text"
             value={userInput}
             onChange={e => processInput(e.target.value)}
             disabled={gameOver}
+            className= {gameOver ? `invisible` : 'visible'}
         />
 
         <button className='rounded-full' onClick={startGame} disabled={!gameOver}>

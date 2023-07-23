@@ -7,7 +7,7 @@ import { sentence } from 'txtgen';
 import { text } from '@fortawesome/fontawesome-svg-core';
 import Word from './Word';
 
-const NUMBER_OF_WORDS = 20;
+const NUMBER_OF_WORDS = 200;
 
 function TypingGame() {
   const preference = useContext(PreferenceContext);
@@ -15,6 +15,7 @@ function TypingGame() {
   const [userInput, setUserInput] = useState('');
   const [texts, setTexts] = useState<Array<String>>([]);
   const [gameOver, setGameOver] = useState(true);
+  const [wpm, setWPM] = useState(0);
   const [timeLeft, setTimeLeft] = useState<number>(preference!.time);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [correctWords, setCorrectWords] = useState<boolean[]>([]);
@@ -45,34 +46,32 @@ function TypingGame() {
     return new Array(NUMBER_OF_WORDS).fill(0).map((c, i) => char[i]);
   }, []);
 
-  useEffect(() => {
-    switch (preference?.wordType) {
-      case "words":
-        setTexts(generateWords());
-        break;
-      case "numbers":
-        setTexts(generateNumber());
-        break;
-      default:
-        setTexts(generateSentence());
-        break;
-    };
+//   const registerKeyDownEvents = useCallback(() => {
+//     if (typeof window !== "undefined") {
+//       document.addEventListener("keydown", () => {
+//         if (!gameOver) {
+//             textInputRef.current!.disabled = false;
+//             textInputRef.current!.focus();
+//         }
+//       });
+//     }
 
-  }, [preference, generateWords, generateNumber, generateSentence, gameOver]);
+//   }, [gameOver]);
 
   const endGame = useCallback(() => {
     if (!gameOver){
         textInputRef.current!.disabled = true;
-        setTimeLeft(0);
         setGameOver(true);
+        setTimeLeft(0);
     }
-  }, [gameOver]);
+  }, [gameOver, preference, correctWords, timeLeft]);
 
   const startGame = useCallback(() => {
     if (gameOver){
         setUserInput('');
         setCurrentWordIndex(0);
         setCorrectWords([]);
+        setWPM(0);
         
         setGameOver(false);
         textInputRef.current!.disabled = false;
@@ -91,11 +90,17 @@ function TypingGame() {
                 }
                 return t - 1;
             });
+
         }, 1000);
     }
   }, [gameOver, endGame, preference]);
 
   const processInput = useCallback((value : string) => {
+
+    let wpm = Math.round(correctWords.filter(w => w === true).length / ((preference!.time - timeLeft) / 60));
+    wpm = wpm < 0 || !wpm || wpm === Infinity ? 0 : wpm;
+
+    setWPM(wpm);
 
     if (value.endsWith(' ')) {
 
@@ -126,10 +131,33 @@ function TypingGame() {
     } else setUserInput(value);
   }, [texts, currentWordIndex, endGame]);
 
+  useEffect(() => {
+
+    if (gameOver) {
+      switch (preference?.wordType) {
+        case "words":
+          setTexts(generateWords());
+          break;
+        case "numbers":
+          setTexts(generateNumber());
+          break;
+        default:
+          setTexts(generateSentence());
+          break;
+      };
+  
+      // setTimeLeft(preference!.time);
+    }
+
+    // registerKeyDownEvents();
+
+  }, [preference, gameOver]);
+
   return (
     <>
         <p>
             {timeLeft}
+            {/* {!gameOver ? timeLeft : null} */}
             {
                 !gameOver ?
                 texts.map((text, index) => {
@@ -140,7 +168,7 @@ function TypingGame() {
                               correct={correctWords[index]}/>
                     );
                 }) : <span>
-                    wpm {(correctWords.filter(w => w === true).length / preference!.time) * 60} 
+                    wpm {wpm} 
                     accuracy: { ((correctWords.filter(w => w === true).length / correctWords.length) * 100).toFixed(2) }%
                     </span>
             }

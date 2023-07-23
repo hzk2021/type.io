@@ -17,3 +17,12 @@
 .active {
   @apply text-white
 }
+
+div:has(div.backdrop-custom) {
+  z-index: -1 !important;
+}
+
+.backdrop-custom {
+  @apply items-end justify-center;
+  /* opacity: 0 !important; */
+}

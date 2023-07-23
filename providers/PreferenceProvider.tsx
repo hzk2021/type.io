@@ -6,7 +6,7 @@ import {PreferenceContext, preferenceDefinition} from '@context/PreferenceContex
 function PreferenceProvider({children} : {children : React.ReactNode}) {
   const [preference, setPreference] = useState<preferenceDefinition>({
     wordType: 'words',
-    time: 15
+    time: 60
   });
 
   return (

@@ -2,7 +2,7 @@ import { createContext } from "react";
 
 type preferenceDefinition = {
     wordType : "words" | "sentences" | "numbers",
-    time : 15 | 30 | 60,
+    time : number
 };
 
 interface preferenceContextProps extends preferenceDefinition{

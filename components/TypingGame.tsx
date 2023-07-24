@@ -6,6 +6,7 @@ import {generate} from 'random-words';
 import { sentence } from 'txtgen';
 import { text } from '@fortawesome/fontawesome-svg-core';
 import Word from './Word';
+import { Typography} from '@material-tailwind/react';
 
 function TypingGame() {
   const preference = useContext(PreferenceContext);
@@ -174,13 +175,13 @@ function TypingGame() {
     <>
       <div>
 
-        {!gameOver && <h1>{timeLeft}</h1>}
-        <p onClick={() => textInputRef.current?.focus()} 
-        className={`cursor-default text-sm md:text-base transition-all delay-0 duration-200 ease-in-out ${(typeof window !== "undefined") ? (
+        {!gameOver && <Typography variant="h2" color="indigo" className="font-normal">{timeLeft}</Typography>}
+        <Typography variant="lead" onClick={() => textInputRef.current?.focus()} 
+        className={`cursor-default text-base md:text-lg transition-all delay-0 duration-200 ease-in-out font-thin ${(typeof window !== "undefined") ? (
                                                                         !(document.activeElement === textInputRef.current)
-                                                                        ? 'blur-sm' 
+                                                                        ? 'blur-sm'
                                                                         : '' ) : null}`
-                      }>
+                       }>
             {
                 !gameOver ?
                 texts.map((text, index) => {
@@ -193,7 +194,7 @@ function TypingGame() {
                     );
                 }) : ''
             }
-        </p>
+        </Typography>
         
         {
           gameOver && texts ?
@@ -212,14 +213,13 @@ function TypingGame() {
             onChange={e => processInput(e.target.value)}
             onKeyDown={e => processCurChar(e.keyCode, e)}
             disabled={gameOver}
-            className= {`${gameOver ? `invisible` : 'visible'}`}
-            // className= {`${gameOver ? `invisible` : 'visible'} opacity-0 select-none fixed -top-200`}
+            className= {`${gameOver ? `invisible` : 'visible'} opacity-0 select-none fixed -top-200`}
             autoFocus={true}
         />
 
-        <button className='rounded-full' onClick={startGame} disabled={!gameOver} tabIndex={-1}>
+        {gameOver && <button className='rounded-full' onClick={() => startGame()} disabled={!gameOver} tabIndex={-1}>
             Start
-        </button>
+        </button>}
     </>
   );
 }

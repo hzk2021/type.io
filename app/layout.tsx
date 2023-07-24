@@ -9,6 +9,7 @@ import MaterialThemeProvider from '@providers/MaterialThemeProvider';
 import Footer from '@components/Footer';
 
 import { config } from "@fortawesome/fontawesome-svg-core";
+import { Suspense } from 'react';
 config.autoAddCss = false;
 
 const inter = Inter({ subsets: ['latin'] });
@@ -36,9 +37,11 @@ export default function RootLayout({
           </MaterialThemeProvider>
         </main>
 
-        <div className="flex flex-wrap items-center justify-center h-16 w-full fixed bottom-0">
-          <Footer />
-        </div>
+        <Footer />
+
+
+        {/* <div className="flex flex-wrap items-center justify-center h-16 w-full fixed bottom-0">
+        </div> */}
 
       </body>
     </html>

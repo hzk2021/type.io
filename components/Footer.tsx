@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function Footer() {
   return (
-    <footer className="fixed bottom-0 max-w-5xl mx-auto sm:px-16 px-6 flex flex-wrap w-full items-center justify-center gap-y-6 gap-x-12 border-blue-gray-50 py-6 text-center md:justify-between">
+    <footer className="relative bottom-0 max-w-5xl mx-auto sm:px-16 px-6 flex flex-wrap w-full items-center justify-center gap-y-6 gap-x-12 border-blue-gray-50 py-6 text-center md:justify-between">
       <Typography 
           tabIndex={-1}
           as="a"

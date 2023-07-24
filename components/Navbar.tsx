@@ -16,7 +16,7 @@ import useSettings from '@hooks/useSettings';
 
 function Navbar() {
 
-  useSettings();
+  const {save} = useSettings();
   
   const preference = useContext(PreferenceContext);
 
@@ -29,6 +29,8 @@ function Navbar() {
       time: values.time,
       words: values.words
     });
+
+    save();
 
 
     if (!open) setOpen(true);

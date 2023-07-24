@@ -2,12 +2,15 @@
 
 import React, { useState } from 'react';
 import {PreferenceContext, preferenceDefinition} from '@context/PreferenceContext';
+import useSettings from '@hooks/useSettings';
 
 function PreferenceProvider({children} : {children : React.ReactNode}) {
+  const {wordNum, wordType} = useSettings();
+
   const [preference, setPreference] = useState<preferenceDefinition>({
-    wordType: 'random',
+    wordType: wordType,
     time: 60,
-    words: 15
+    words: wordNum as number
   });
 
   return (

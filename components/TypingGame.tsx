@@ -175,9 +175,9 @@ function TypingGame() {
     <>
       <div>
 
-        {!gameOver && <Typography variant="h2" color="indigo" className="font-normal">{timeLeft}</Typography>}
+        {!gameOver && <Typography variant="h2" color="indigo" className="font-normal text-center sm:text-left">{timeLeft}</Typography>}
         <Typography variant="lead" onClick={() => textInputRef.current?.focus()} 
-        className={`text-center cursor-default text-base md:text-lg font-thin`}>
+        className={`cursor-default text-base md:text-lg font-thin`}>
             {
                 !gameOver ?
                 texts.map((text, index) => {

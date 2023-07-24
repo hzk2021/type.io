@@ -6,7 +6,7 @@ import {generate} from 'random-words';
 import { sentence } from 'txtgen';
 import { text } from '@fortawesome/fontawesome-svg-core';
 import Word from './Word';
-import { Typography} from '@material-tailwind/react';
+import { Typography, Button} from '@material-tailwind/react';
 
 function TypingGame() {
   const preference = useContext(PreferenceContext);
@@ -177,11 +177,7 @@ function TypingGame() {
 
         {!gameOver && <Typography variant="h2" color="indigo" className="font-normal">{timeLeft}</Typography>}
         <Typography variant="lead" onClick={() => textInputRef.current?.focus()} 
-        className={`cursor-default text-base md:text-lg transition-all delay-0 duration-200 ease-in-out font-thin ${(typeof window !== "undefined") ? (
-                                                                        !(document.activeElement === textInputRef.current)
-                                                                        ? 'blur-sm'
-                                                                        : '' ) : null}`
-                       }>
+        className={`text-center cursor-default text-base md:text-lg font-thin`}>
             {
                 !gameOver ?
                 texts.map((text, index) => {
@@ -190,7 +186,9 @@ function TypingGame() {
                               text={text}
                               active={index === currentWordIndex}
                               currentCharIndex={currentCharIndex}
-                              correct={correctWords[index]}/>
+                              correct={correctWords[index]}
+                              className=""
+                              focus={document.activeElement === textInputRef.current}/>
                     );
                 }) : ''
             }
@@ -198,10 +196,17 @@ function TypingGame() {
         
         {
           gameOver && texts ?
-          <span>
-            wpm {wpm} 
-            accuracy: { ((correctWords.filter(w => w === true).length / correctWords.length) * 100).toFixed(2) }%
-          </span> : null
+          <div className='text-3xl font-bold flex flex-wrap gap-5 items-center content-center'>
+            <span>{wpm}
+              <span className='text-base'>WPM</span>
+            </span>
+            |
+
+            <span className='flex flex-col'>
+              { ((correctWords.filter(w => w === true).length / correctWords.length) * 100).toFixed(2) }%
+              <span className='text-xs self-end'>ACCURACY</span>
+            </span>
+          </div> : null
         }
         
       </div>
@@ -217,9 +222,23 @@ function TypingGame() {
             autoFocus={true}
         />
 
-        {gameOver && <button className='rounded-full' onClick={() => startGame()} disabled={!gameOver} tabIndex={-1}>
-            Start
-        </button>}
+        {gameOver && <Button variant="gradient" color='indigo' className='rounded-full flex items-center gap-2' onClick={() => startGame()} disabled={!gameOver} tabIndex={-1}>
+            Generate Text
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+              className="h-5 w-5"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+              />
+            </svg>
+        </Button>}
     </>
   );
 }

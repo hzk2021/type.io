@@ -12,7 +12,12 @@ import {
   Alert
 } from "@material-tailwind/react";
 
+import useSettings from '@hooks/useSettings';
+
 function Navbar() {
+
+  useSettings();
+  
   const preference = useContext(PreferenceContext);
 
   const [open, setOpen] = React.useState(false);
@@ -40,7 +45,6 @@ function Navbar() {
 
   return (
     <nav className='flex w-full mt-2 mb-16 pt-3 gap-5 items-center justify-center flex-wrap sm:justify-between'>
-
         <div className='fixed left-0 bottom-0 mx-auto flex w-full justify-center mb-3'>
           <Alert open={open} onClose={() => setOpen(false)} animate={{
             mount: {'y' : '-100'},

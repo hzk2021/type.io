@@ -12,7 +12,7 @@ module.exports = withMT({
 
     },
     screens: {
-      'sm': '525px'
+      'sm': '540px'
     }
   },
   plugins: [],

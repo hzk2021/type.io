@@ -31,6 +31,7 @@ export default function RootLayout({
             <PreferenceProvider>
               <Navbar />
               {children}
+
             </PreferenceProvider>
           </MaterialThemeProvider>
         </main>

@@ -53,36 +53,36 @@ function Navbar() {
         </div>
       
         <div className='flex gap-4 text-4xl sm:text-lg'>
-          <Link href="/" title='Play' className='hidden sm:block'>
+          <Link href="/" title='Play' className='hidden sm:block' tabIndex={-1}>
             <FontAwesomeIcon icon={faT} inverse size='lg'/>ype.io
           </Link>
           <div className='icons flex gap-2'>
-              <Link href="/" title='Play'>
-                <FontAwesomeIcon icon={faKeyboard} inverse/>
+              <Link href="/" title='Play' tabIndex={-1}>
+                <FontAwesomeIcon icon={faKeyboard} inverse tabIndex={-1}/>
               </Link>
-              <Link href="/" title='Leaderboard'>
-                <FontAwesomeIcon icon={faCrown} inverse/>
+              <Link href="/" title='Leaderboard' tabIndex={-1}>
+                <FontAwesomeIcon icon={faCrown} inverse tabIndex={-1}/>
               </Link>
-              <Link href="/" title='Account'>
-                <FontAwesomeIcon icon={faUser} inverse/>
+              <Link href="/" title='Account' tabIndex={-1}>
+                <FontAwesomeIcon icon={faUser} inverse tabIndex={-1}/>
               </Link>
           </div>
         </div>
 
         <div className='flex options flex-col cursor-pointer text-lg sm:text-base'>
-            <div className='flex option-type gap-2'>
-              <span className={`hover:text-white ${preference?.wordType === 'random' ? 'text-white' : ''}`} onClick={() => handleChange({words: preference!.words, time: preference!.time, wordType: "random"})}>random</span>
-              <span className={`hover:text-white ${preference?.wordType === 'sentences' ? 'text-white' : ''}`} onClick={() => handleChange({words: preference!.words, time: preference!.time, wordType: "sentences"})}>sentences</span>
-              <span className={`hover:text-white ${preference?.wordType === 'numbers' ? 'text-white' : ''}`} onClick={() => handleChange({words: preference!.words, time: preference!.time, wordType: "numbers"})}>numbers</span>
+            <div className='flex option-type gap-2' >
+              <button tabIndex={-1} className={`hover:text-white ${preference?.wordType === 'random' ? 'text-white' : ''}`} onClick={() => handleChange({words: preference!.words, time: preference!.time, wordType: "random"})}>random</button>
+              <button tabIndex={-1} className={`hover:text-white ${preference?.wordType === 'sentences' ? 'text-white' : ''}`} onClick={() => handleChange({words: preference!.words, time: preference!.time, wordType: "sentences"})}>sentences</button>
+              <button tabIndex={-1} className={`hover:text-white ${preference?.wordType === 'numbers' ? 'text-white' : ''}`} onClick={() => handleChange({words: preference!.words, time: preference!.time, wordType: "numbers"})}>numbers</button>
             </div>
 
             <div className='flex option self-end gap-2'>
-              <span className={`hover:text-white ${preference?.words === 15 ? 'text-white' : ''}`} onClick={() => handleChange({words: 15, time: preference!.time, wordType: preference!.wordType})}>15</span>
-              <span className={`hover:text-white ${preference?.words === 30 ? 'text-white' : ''}`} onClick={() => handleChange({words: 30, time: preference!.time, wordType: preference!.wordType})}>30</span>
-              <span className={`hover:text-white ${preference?.words === 60 ? 'text-white' : ''}`} onClick={() => handleChange({words: 60, time: preference!.time, wordType: preference!.wordType})}>60</span>
-              <span className={`hover:text-white ${preference?.words === 120 ? 'text-white' : ''}`} onClick={() => handleChange({words: 120, time: preference!.time, wordType: preference!.wordType})}>120</span>
-              <span className={`hover:text-white ${preference?.words === 240 ? 'text-white' : ''}`} onClick={() => handleChange({words: 240, time: preference!.time, wordType: preference!.wordType})}>240</span>
-              <span className={`text-white`}>words</span>
+              <button tabIndex={-1} className={`hover:text-white ${preference?.words === 15 ? 'text-white' : ''}`} onClick={() => handleChange({words: 15, time: preference!.time, wordType: preference!.wordType})}>15</button>
+              <button tabIndex={-1} className={`hover:text-white ${preference?.words === 30 ? 'text-white' : ''}`} onClick={() => handleChange({words: 30, time: preference!.time, wordType: preference!.wordType})}>30</button>
+              <button tabIndex={-1} className={`hover:text-white ${preference?.words === 60 ? 'text-white' : ''}`} onClick={() => handleChange({words: 60, time: preference!.time, wordType: preference!.wordType})}>60</button>
+              <button tabIndex={-1} className={`hover:text-white ${preference?.words === 120 ? 'text-white' : ''}`} onClick={() => handleChange({words: 120, time: preference!.time, wordType: preference!.wordType})}>120</button>
+              <button tabIndex={-1} className={`hover:text-white ${preference?.words === 240 ? 'text-white' : ''}`} onClick={() => handleChange({words: 240, time: preference!.time, wordType: preference!.wordType})}>240</button>
+              <span tabIndex={-1} className={`text-white cursor-default`}>words</span>
             </div>
         </div>
     </nav>

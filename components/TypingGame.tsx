@@ -17,6 +17,7 @@ function TypingGame() {
   const [timeLeft, setTimeLeft] = useState<number>(preference!.time);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [correctWords, setCorrectWords] = useState<boolean[]>([]);
+  const [currentCharIndex, setCurrentCharIndex] = useState(0);
 
   const textInputRef = useRef<HTMLInputElement>(null);
 
@@ -44,18 +45,6 @@ function TypingGame() {
     return new Array(preference!.words).fill(0).map((c, i) => char[i]);
   }, [preference]);
 
-//   const registerKeyDownEvents = useCallback(() => {
-//     if (typeof window !== "undefined") {
-//       document.addEventListener("keydown", () => {
-//         if (!gameOver) {
-//             textInputRef.current!.disabled = false;
-//             textInputRef.current!.focus();
-//         }
-//       });
-//     }
-
-//   }, [gameOver]);
-
   const endGame = useCallback(() => {
     if (!gameOver){
         textInputRef.current!.disabled = true;
@@ -68,12 +57,17 @@ function TypingGame() {
     if (gameOver){
         setUserInput('');
         setCurrentWordIndex(0);
+        setCurrentCharIndex(0);
         setCorrectWords([]);
         setWPM(0);
         
         setGameOver(false);
-        textInputRef.current!.disabled = false;
-        textInputRef.current!.focus();
+
+        setTimeout(() => {
+          textInputRef.current!.disabled = false;
+          textInputRef.current!.focus();
+
+        },10);
 
         const interval = setInterval(() => {
 
@@ -93,14 +87,41 @@ function TypingGame() {
     }
   }, [gameOver, endGame, preference]);
 
+  const processCurChar = useCallback((keyCode: number, e : React.KeyboardEvent<HTMLInputElement>) => {
+    // checks
+
+    switch (keyCode) {
+      case 8:
+        // Prevents backspacing if current char index is 0
+        if (currentCharIndex === 0) return;
+        break;
+      default:
+        if (!(keyCode >= 48 && keyCode <= 90)) return;
+        break;
+    }
+
+    if (keyCode === 8) return setCurrentCharIndex((i) => i - 1);
+    else {
+      if (currentCharIndex >= texts[currentWordIndex].length) {
+        return e.preventDefault();
+      }
+
+      return setCurrentCharIndex((i) => i + 1);
+
+    };
+
+  }, [currentCharIndex, texts, currentWordIndex]);
+
   const processInput = useCallback((value : string) => {
 
     let wpm = Math.round(correctWords.filter(w => w === true).length / ((preference!.time - timeLeft) / 60));
     wpm = wpm < 0 || !wpm || wpm === Infinity ? 0 : wpm;
 
     setWPM(wpm);
-
+    
     if (value.endsWith(' ')) {
+
+        setCurrentCharIndex(0);
 
         // check if user has finished typing the words
         if (currentWordIndex >= texts.length - 1){
@@ -126,6 +147,8 @@ function TypingGame() {
 
         setCurrentWordIndex(ci => ci + 1);
         setUserInput('');
+
+        setCurrentCharIndex(0);
     } else setUserInput(value);
   }, [texts, currentWordIndex, endGame]);
 
@@ -145,9 +168,6 @@ function TypingGame() {
       };
       // setTimeLeft(preference!.time);
     }
-
-    // registerKeyDownEvents();
-
   }, [preference, gameOver]);
 
   return (
@@ -155,9 +175,10 @@ function TypingGame() {
       <div>
 
         {!gameOver && <h1>{timeLeft}</h1>}
-        <p className={`text-sm md:text-base transition-all duration-7 ${(typeof window !== "undefined") ? (
+        <p onClick={() => textInputRef.current?.focus()} 
+        className={`cursor-default text-sm md:text-base transition-all delay-0 duration-200 ease-in-out ${(typeof window !== "undefined") ? (
                                                                         !(document.activeElement === textInputRef.current)
-                                                                        ? 'blur-lg' 
+                                                                        ? 'blur-sm' 
                                                                         : '' ) : null}`
                       }>
             {
@@ -167,6 +188,7 @@ function TypingGame() {
                         <Word key={index}
                               text={text}
                               active={index === currentWordIndex}
+                              currentCharIndex={currentCharIndex}
                               correct={correctWords[index]}/>
                     );
                 }) : ''
@@ -188,11 +210,14 @@ function TypingGame() {
             type="text"
             value={userInput}
             onChange={e => processInput(e.target.value)}
+            onKeyDown={e => processCurChar(e.keyCode, e)}
             disabled={gameOver}
-            className= {gameOver ? `invisible` : 'visible'}
+            className= {`${gameOver ? `invisible` : 'visible'}`}
+            // className= {`${gameOver ? `invisible` : 'visible'} opacity-0 select-none fixed -top-200`}
+            autoFocus={true}
         />
 
-        <button className='rounded-full' onClick={startGame} disabled={!gameOver}>
+        <button className='rounded-full' onClick={startGame} disabled={!gameOver} tabIndex={-1}>
             Start
         </button>
     </>

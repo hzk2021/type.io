@@ -9,7 +9,6 @@ import MaterialThemeProvider from '@providers/MaterialThemeProvider';
 import Footer from '@components/Footer';
 
 import { config } from "@fortawesome/fontawesome-svg-core";
-import { Suspense } from 'react';
 config.autoAddCss = false;
 
 const inter = Inter({ subsets: ['latin'] });
@@ -27,6 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} text-gray-500 bg-gray-900 min-w-[350px] min-h-screen`}>
+        
         <main className='app'>
           <MaterialThemeProvider>
             <PreferenceProvider>

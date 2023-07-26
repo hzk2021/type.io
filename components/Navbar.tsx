@@ -12,11 +12,11 @@ import {
   Alert
 } from "@material-tailwind/react";
 
-import useSettings from '@hooks/useSettings';
+// import useSettings from '@hooks/useSettings';
 
 function Navbar() {
 
-  const {save} = useSettings();
+  // const {save} = useSettings();
   
   const preference = useContext(PreferenceContext);
 
@@ -30,7 +30,7 @@ function Navbar() {
       words: values.words
     });
 
-    save();
+    // save();
 
 
     if (!open) setOpen(true);
@@ -87,7 +87,6 @@ function Navbar() {
               <button tabIndex={-1} className={`hover:text-white ${preference?.words === 30 ? 'text-white' : ''}`} onClick={() => handleChange({words: 30, time: preference!.time, wordType: preference!.wordType})}>30</button>
               <button tabIndex={-1} className={`hover:text-white ${preference?.words === 60 ? 'text-white' : ''}`} onClick={() => handleChange({words: 60, time: preference!.time, wordType: preference!.wordType})}>60</button>
               <button tabIndex={-1} className={`hover:text-white ${preference?.words === 120 ? 'text-white' : ''}`} onClick={() => handleChange({words: 120, time: preference!.time, wordType: preference!.wordType})}>120</button>
-              <button tabIndex={-1} className={`hover:text-white ${preference?.words === 240 ? 'text-white' : ''}`} onClick={() => handleChange({words: 240, time: preference!.time, wordType: preference!.wordType})}>240</button>
               <span tabIndex={-1} className={`text-white cursor-default`}>words</span>
             </div>
         </div>

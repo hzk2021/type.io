@@ -30,7 +30,7 @@ function Navbar() {
       words: values.words
     });
 
-    save(values.wordType, values.words);
+    save(values.wordType, values.words.toString());
 
 
     if (!open) setOpen(true);

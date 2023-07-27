@@ -205,7 +205,7 @@ function TypingGame() {
             }}
             className="cursor-pointer"/>
             
-            <Typography variant="h4" className="text-base md:text-2xl">Gameover! Refresh and and type to start/restart!</Typography>
+            <Typography variant="h4" className="text-base md:text-2xl">Gameover! Refresh and start typing!</Typography>
 
           </div>
         }

@@ -12,11 +12,11 @@ import {
   Alert
 } from "@material-tailwind/react";
 
-// import useSettings from '@hooks/useSettings';
+import useSettings from '@hooks/useSettings';
 
 function Navbar() {
 
-  // const {save} = useSettings();
+  const {save} = useSettings();
   
   const preference = useContext(PreferenceContext);
 
@@ -30,7 +30,7 @@ function Navbar() {
       words: values.words
     });
 
-    // save();
+    save(values.wordType, values.words);
 
 
     if (!open) setOpen(true);

@@ -7,6 +7,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import PreferenceProvider from '@providers/PreferenceProvider';
 import MaterialThemeProvider from '@providers/MaterialThemeProvider';
 import Footer from '@components/Footer';
+import NextAuthProvider from '@providers/NextAuthProvider';
 
 import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
@@ -30,8 +31,10 @@ export default function RootLayout({
         <main className='app'>
           <MaterialThemeProvider>
             <PreferenceProvider>
-              <Navbar />
-              {children}
+              <NextAuthProvider>
+                <Navbar />
+                {children}
+              </NextAuthProvider>
 
             </PreferenceProvider>
           </MaterialThemeProvider>

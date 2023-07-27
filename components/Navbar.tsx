@@ -22,7 +22,6 @@ function Navbar() {
 
   const [open, setOpen] = React.useState(false);
  
-
   function handleChange(values : preferenceDefinition) {
     preference?.setPreference({
       wordType: values.wordType,
@@ -62,14 +61,15 @@ function Navbar() {
           <Link href="/" title='Play' className='hidden sm:block' tabIndex={-1}>
             <FontAwesomeIcon icon={faT} inverse size='lg'/>ype.io
           </Link>
+
           <div className='icons flex gap-2'>
               <Link href="/" title='Play' tabIndex={-1}>
                 <FontAwesomeIcon icon={faKeyboard} inverse tabIndex={-1}/>
               </Link>
-              <Link href="/" title='Leaderboard' tabIndex={-1}>
+              <Link href="/leaderboard" title='Leaderboard' tabIndex={-1}>
                 <FontAwesomeIcon icon={faCrown} inverse tabIndex={-1}/>
               </Link>
-              <Link href="/" title='Account' tabIndex={-1}>
+              <Link href="/account" title='Account' tabIndex={-1}>
                 <FontAwesomeIcon icon={faUser} inverse tabIndex={-1}/>
               </Link>
           </div>

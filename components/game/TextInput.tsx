@@ -10,7 +10,7 @@ function TextInput({ onChange = ()=> {}, onKeyDown = ()=> {}, inputRef, value, c
     onUnfocus : Function
 }) {
     return (
-      <input type="text" onChange={(e) => onChange(e)} ref={inputRef} value={value} onKeyDown={e => onKeyDown(e)} className={className} onFocus={() => {onFocus();}} onBlur={() => {onUnfocus();}}/>
+      <input type="text" onChange={(e) => onChange(e)} ref={inputRef} value={value} onKeyDown={e => onKeyDown(e)} className={className} onFocus={() => {onFocus();}} onBlur={() => {onUnfocus();}} autoFocus/>
     );
 }
 export default TextInput;

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import useLoadText from '@hooks/useLoadText';
 import Timer from './Timer';
 import Paragraph from './Paragraph';
@@ -11,7 +11,8 @@ import { PreferenceContext } from '@context/PreferenceContext';
 import { useContext, forwardRef } from 'react';
 import { useRef } from 'react';
 import useTimer from '@hooks/useTimer';
-import { Typography } from '@material-tailwind/react';
+import { Button, Typography } from '@material-tailwind/react';
+import { useSession } from 'next-auth/react';
 
 enum KeyCodes {
   Backspace = 8,
@@ -20,6 +21,7 @@ enum KeyCodes {
 
 function TypingGame() {
 
+  const {data : session} = useSession();
   const preference = useContext(PreferenceContext);
 
   const [currentWordIndex, setWordIndex] = useState(0);
@@ -37,7 +39,11 @@ function TypingGame() {
   const [refetch, setRefetch] = useState(false);
   const {words, fetched} = useLoadText(refetch);
 
+  const [firstLoad, setFirstLoad] = useState(true);
+  const [scoreSaved, setScoreSaved] = useState(false);
+
   function keyDownHandler(e : React.KeyboardEvent) {
+    setFirstLoad(false);
 
     // Checks
     switch (e.keyCode) {
@@ -80,6 +86,7 @@ function TypingGame() {
   }
 
   function restartGame() {
+    setScoreSaved(false);
     setCurrentLetterIndex(0);
     setWordIndex(currentWordIndex + 1);
     setInputValue("");
@@ -134,6 +141,23 @@ function TypingGame() {
     }
   }, [timeLeft]);
 
+  async function saveHighScore() {
+    if (!session) return;
+
+    const highestRecord = await (await fetch(`http://localhost:3000/api/leaderboard/record?email=${session.user.email}`)).json();
+
+    if (wpm > highestRecord.wpm) {  
+      const newRecord = await fetch(`http://localhost:3000/api/leaderboard/record/new`, {
+        method: "POST",
+        body: JSON.stringify({email: session.user.email, wpm: wpm.toFixed(0), secret: process.env.NEXT_PUBLIC_SECRET})
+      });
+    } else {
+      alert("Previous highscore was better!");
+    }
+
+    setScoreSaved(true);
+  }
+
   useEffect(() => {
     if (gameOver && inputRef.current != null) {
       inputRef.current.disabled = true;
@@ -152,6 +176,7 @@ function TypingGame() {
 
       setAllAnswers([]);
       setWordIndex(0);
+
     }
   }, [gameOver]);
 
@@ -185,7 +210,7 @@ function TypingGame() {
                    onFocus={() => {setFocus(true);}}
                    onUnfocus={() => {setFocus(false);}}/>
 
-        {gameOver && 
+        {gameOver && !firstLoad && 
           <div className='flex flex-col self-center place-items-center mt-12 gap-2'>
 
             <div className='text-3xl font-bold flex flex-wrap gap-5 items-center content-center'>
@@ -206,7 +231,10 @@ function TypingGame() {
             className="cursor-pointer"/>
             
             <Typography variant="h4" className="text-base md:text-2xl">Gameover! Refresh and start typing!</Typography>
-
+            {wpm !== 0 && !scoreSaved && <Button onClick={async () => {
+              await saveHighScore();
+            }}>Save score</Button>
+            }
           </div>
         }
 

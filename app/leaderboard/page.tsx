@@ -13,7 +13,7 @@ function Rankings() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await (await fetch(`http://localhost:3000/api/leaderboard`, {
+      const data = await (await fetch(`${process.env.NEXT_PUBLIC_URI_IDENTIFIER}/api/leaderboard`, {
       method: 'GET',
       next: { revalidate: 60}
       })).json();
@@ -27,7 +27,7 @@ function Rankings() {
 
 
 
-return <>
+return <div className='min-h-[500px] w-full flex flex-col gap-5'>
 <h1> Top 100 Leaderboard</h1>
 <Card className="w-full h-full overflow-scroll">
       <table className="w-full min-w-max table-auto text-left">
@@ -69,7 +69,7 @@ return <>
       </table>
     </Card>
 
-  </>
+  </div>
   ;
 }
 

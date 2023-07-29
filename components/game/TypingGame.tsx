@@ -144,10 +144,10 @@ function TypingGame() {
   async function saveHighScore() {
     if (!session) return;
 
-    const highestRecord = await (await fetch(`http://localhost:3000/api/leaderboard/record?email=${session.user.email}`)).json();
+    const highestRecord = await (await fetch(`${process.env.NEXT_PUBLIC_URI_IDENTIFIER}/api/leaderboard/record?email=${session.user.email}`)).json();
 
     if (wpm > highestRecord.wpm) {  
-      const newRecord = await fetch(`http://localhost:3000/api/leaderboard/record/new`, {
+      const newRecord = await fetch(`${process.env.NEXT_PUBLIC_URI_IDENTIFIER}/api/leaderboard/record/new`, {
         method: "POST",
         body: JSON.stringify({email: session.user.email, wpm: wpm.toFixed(0), secret: process.env.NEXT_PUBLIC_SECRET})
       });
@@ -231,7 +231,7 @@ function TypingGame() {
             className="cursor-pointer"/>
             
             <Typography variant="h4" className="text-base md:text-2xl">Gameover! Refresh and start typing!</Typography>
-            {wpm !== 0 && !scoreSaved && <Button onClick={async () => {
+            {wpm !== 0 && !scoreSaved && session && <Button onClick={async () => {
               await saveHighScore();
             }}>Save score</Button>
             }

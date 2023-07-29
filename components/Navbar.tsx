@@ -13,6 +13,7 @@ import {
 } from "@material-tailwind/react";
 
 import useSettings from '@hooks/useSettings';
+import { usePathname } from 'next/navigation';
 
 function Navbar() {
 
@@ -21,6 +22,8 @@ function Navbar() {
   const preference = useContext(PreferenceContext);
 
   const [open, setOpen] = React.useState(false);
+
+  const pathName = usePathname();
  
   function handleChange(values : preferenceDefinition) {
     preference?.setPreference({
@@ -42,6 +45,7 @@ function Navbar() {
         clearTimeout(interval);
       }
     }, 1500);
+
   }, [open]);
 
   return (
@@ -63,13 +67,13 @@ function Navbar() {
           </Link>
 
           <div className='icons flex gap-2'>
-              <Link href="/" title='Play' tabIndex={-1}>
+              <Link href="/" title='Play' tabIndex={-1} className={`${pathName === '/' ? '[&>svg]:text-white' : '[&>svg]:text-gray-400'}`}>
                 <FontAwesomeIcon icon={faKeyboard} inverse tabIndex={-1}/>
               </Link>
-              <Link href="/leaderboard" title='Leaderboard' tabIndex={-1}>
+              <Link href="/leaderboard" title='Leaderboard' tabIndex={-1} className={`${pathName === '/leaderboard' ? '[&>svg]:text-white' : '[&>svg]:text-gray-400'}`}>
                 <FontAwesomeIcon icon={faCrown} inverse tabIndex={-1}/>
               </Link>
-              <Link href="/account" title='Account' tabIndex={-1}>
+              <Link href="/account" title='Account' tabIndex={-1} className={`${pathName === '/account' ? '[&>svg]:text-white' : '[&>svg]:text-gray-400'}`}>
                 <FontAwesomeIcon icon={faUser} inverse tabIndex={-1}/>
               </Link>
           </div>

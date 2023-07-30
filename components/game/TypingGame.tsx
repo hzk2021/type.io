@@ -145,7 +145,10 @@ function TypingGame() {
   async function saveHighScore() {
     if (!session) return;
 
-    const highestRecord = await (await fetch(`${process.env.NEXT_PUBLIC_URI_IDENTIFIER}/api/leaderboard/record?email=${session.user.email}`)).json();
+    const highestRecord = await (await fetch(`${process.env.NEXT_PUBLIC_URI_IDENTIFIER}/api/leaderboard/record`, {
+      method: "POST",
+      body: JSON.stringify({email: session.user.email})
+    })).json();
 
     if (wpm > highestRecord.wpm) {  
       const newRecord = await fetch(`${process.env.NEXT_PUBLIC_URI_IDENTIFIER}/api/leaderboard/record/new`, {

@@ -8,7 +8,6 @@ function useFetch<T = any | undefined>(method : string, url: string, body ?: str
     const fetchData = async () => {
       const data = await (await fetch(url, {
       method,
-      next: { revalidate: 60},
       body
       })).json();
       

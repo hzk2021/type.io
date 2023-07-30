@@ -1,6 +1,5 @@
 'use client';
 
-import { authOptions } from '@app/api/auth/[...nextauth]/route';
 import StyledButton from '@components/account/StyledButton';
 import Table from '@components/leaderboard/Table';
 import useFetch from '@hooks/useFetch';

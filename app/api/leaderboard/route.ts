@@ -3,7 +3,7 @@ import Leaderboard from "@models/Leaderboard";
 import { NextRequest, NextResponse } from "next/server";
 import { connectToDB } from "@utils/database";
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 15;
 export async function GET(req : NextRequest, res: NextResponse) {
 
     try {

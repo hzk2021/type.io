@@ -10,6 +10,11 @@
 
 body {
   font-family: Poppins, monospace, sans-serif !important;
+  font-weight: 700;
+}
+
+.font-family-inherit {
+  font-family: inherit;
 }
 
 .app {
@@ -30,4 +35,18 @@ div:has(div.backdrop-custom) {
 
 .backdrop-custom {
   @apply items-end justify-center transition-all duration-200;
+}
+
+@layer utilities {
+  @variants responsive {
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  }
 }

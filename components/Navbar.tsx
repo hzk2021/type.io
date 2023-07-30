@@ -21,7 +21,7 @@ function Navbar() {
   
   const preference = useContext(PreferenceContext);
 
-  const [open, setOpen] = React.useState(false);
+  // const [open, setOpen] = React.useState(false);
 
   const pathName = usePathname();
  
@@ -35,22 +35,22 @@ function Navbar() {
     save(values.wordType, values.words.toString());
 
 
-    if (!open) setOpen(true);
+    // if (!open) setOpen(true);
   }
 
-  useEffect(() => {
-    let interval = setTimeout(() => {
-      if (open){
-        setOpen(false);
-        clearTimeout(interval);
-      }
-    }, 1500);
+  // useEffect(() => {
+  //   let interval = setTimeout(() => {
+  //     if (open){
+  //       setOpen(false);
+  //       clearTimeout(interval);
+  //     }
+  //   }, 1500);
 
-  }, [open]);
+  // }, [open]);
 
   return (
-    <nav className='flex w-full mt-2 mb-16 pt-3 gap-5 items-center justify-center flex-wrap sm:justify-between'>
-        <div className='fixed left-0 bottom-0 mx-auto flex w-full justify-center mb-3'>
+    <nav className='flex w-full mt-5 mb-16 pt-3 gap-5 items-center justify-center flex-wrap sm:justify-between'>
+        {/* <div className='fixed left-0 bottom-0 mx-auto flex w-full justify-center mb-3'>
           <Alert open={open} onClose={() => setOpen(false)} animate={{
             mount: {'y' : '-100'},
             unmount: {'y': '0'},
@@ -59,9 +59,9 @@ function Navbar() {
           className="w-max bg-[#b2b1b9] rounded font-bold shadow-sm flex place-items-center">
               Preference Saved
           </Alert>
-        </div>
+        </div> */}
       
-        <div className='flex gap-4 text-4xl sm:text-lg'>
+        <div className='flex gap-4 text-4xl sm:text-xl'>
           <Link href="/" title='Play' className='hidden sm:block' tabIndex={-1}>
             <FontAwesomeIcon icon={faT} inverse size='lg'/>ype.io
           </Link>
@@ -79,7 +79,7 @@ function Navbar() {
           </div>
         </div>
 
-        <div className='flex options flex-col cursor-pointer text-lg sm:text-base'>
+        <div className='flex options flex-col cursor-pointer text-lg sm:text-sm'>
             <div className='flex option-type gap-2' >
               <button tabIndex={-1} className={`hover:text-white ${preference?.wordType === 'random' ? 'text-white' : ''}`} onClick={() => handleChange({words: preference!.words, time: preference!.time, wordType: "random"})}>random</button>
               <button tabIndex={-1} className={`hover:text-white ${preference?.wordType === 'sentences' ? 'text-white' : ''}`} onClick={() => handleChange({words: preference!.words, time: preference!.time, wordType: "sentences"})}>sentences</button>

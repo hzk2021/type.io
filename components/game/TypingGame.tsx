@@ -13,6 +13,7 @@ import { useRef } from 'react';
 import useTimer from '@hooks/useTimer';
 import { Button, Typography } from '@material-tailwind/react';
 import { useSession } from 'next-auth/react';
+import useFetch from '@hooks/useFetch';
 
 enum KeyCodes {
   Backspace = 8,
@@ -190,7 +191,7 @@ function TypingGame() {
     <>
     {
       <div className='flex flex-col w-full gap-3 min-h-full'>
-        <Timer time={timeLeft} className="font-thin"/>
+        <Timer time={timeLeft} className="font-bold"/>
 
         <Paragraph words={words}
                     currentWordIndex={currentWordIndex}
@@ -230,7 +231,7 @@ function TypingGame() {
             }}
             className="cursor-pointer"/>
             
-            <Typography variant="h4" className="text-base md:text-2xl">Gameover! Refresh and start typing!</Typography>
+            {/* <Typography variant="h4" className="text-base md:text-2xl">Gameover! Refresh and start typing!</Typography> */}
             {wpm !== 0 && !scoreSaved && session && <Button onClick={async () => {
               await saveHighScore();
             }}>Save score</Button>

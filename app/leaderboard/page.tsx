@@ -1,76 +1,34 @@
 'use client';
 
 import { authOptions } from '@app/api/auth/[...nextauth]/route';
+import StyledButton from '@components/account/StyledButton';
+import Table from '@components/leaderboard/Table';
+import useFetch from '@hooks/useFetch';
+import { Typography } from '@material-tailwind/react';
 import { GetServerSidePropsContext } from 'next';
 import { getServerSession } from 'next-auth';
 import React, { useEffect, useState } from 'react';
-import {Card, Typography} from "@material-tailwind/react";
+import { useRouter} from "next/navigation";
 
 function Rankings() {
 
-  const [records, setRecords] = useState<{_id: string, wpm: Number, byUserEmail: string}[]>([]);
+  const router = useRouter();
+  const records = useFetch<{_id: string, wpm: Number, byUserEmail: string}[]>("GET", `${process.env.NEXT_PUBLIC_URI_IDENTIFIER}/api/leaderboard`);
   const JSON_HEAD = ['User', 'WPM'];
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await (await fetch(`${process.env.NEXT_PUBLIC_URI_IDENTIFIER}/api/leaderboard`, {
-      method: 'GET',
-      next: { revalidate: 60}
-      })).json();
-      
-      setRecords(data);
-    };
-
-    fetchData();
-  },[]);
+  console.log(records);
 
 
-
-
-return <div className='min-h-[500px] w-full flex flex-col gap-5'>
-<h1> Top 100 Leaderboard</h1>
-<Card className="w-full h-full overflow-scroll">
-      <table className="w-full min-w-max table-auto text-left">
-        <thead>
-          <tr>
-            {JSON_HEAD.map((head) => (
-              <th key={head} className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="font-normal leading-none opacity-70"
-                >
-                  {head}
-                </Typography>
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {records.map((record) => {
-            const classes = "p-4";
- 
-            return (
-              <tr key={record.byUserEmail}>
-                <td className={classes}>
-                  <Typography variant="small" color="blue-gray" className="font-normal">
-                    {record.byUserEmail}
-                  </Typography>
-                </td>
-                <td className={classes}>
-                  <Typography variant="small" color="blue-gray" className="font-normal">
-                    {record.wpm}
-                  </Typography>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </Card>
-
+return (
+<div className='min-h-[500px] w-full flex flex-col gap-5'>
+  <div className='flex flex-wrap justify-center gap-5 md:justify-between'>
+    <Typography variant="h3" className="text-clamp">top 100 leaderboard</Typography>
+    <StyledButton size="sm" onClick={() => {router.push('/account');}} className="font-normal text-white rounded-none">tip: sign in to submit your highscore</StyledButton>
   </div>
-  ;
+  <Table jsonHead={JSON_HEAD} 
+         jsonBody={records ? records : []}
+  />
+</div>);
 }
 
 export default Rankings;

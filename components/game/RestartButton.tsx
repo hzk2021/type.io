@@ -6,7 +6,7 @@ import { Button } from '@material-tailwind/react';
 function RestartButton({onClick, className} : {onClick : Function, className?: string}) {
     return (
       <div>
-        <Button variant='text' onClick={() => onClick()} className={className} color="indigo">
+        <Button variant='text' onClick={() => onClick()} className={className} color="indigo" title="Restart">
           <FontAwesomeIcon icon={faArrowsRotate} size="xl"/>
         </Button>
       </div>

@@ -12,7 +12,7 @@ function Paragraph({words, currentWordIndex, userAnswers, currentLetterIndex, al
 }) {
     return (
       <>
-        <Typography variant="lead" className={`text-justify border-2 p-1 shadow-lg ${!hasFocus && 'blur-sm transition-all duration-200 ease-in'} ${hasFocus && 'blur-none transition-all duration-200 ease-out'}`} onClick={() => onClick()}>
+        <Typography variant="lead" className={`font-family-inherit text-justify p-1 shadow-2xl ${!hasFocus && 'blur-sm transition-all duration-200 ease-in'} ${hasFocus && 'blur-none transition-all duration-200 ease-out'}`} onClick={() => onClick()}>
           {words.map((word, wordIndex) => {
               return <span className={`word ${currentWordIndex == wordIndex ? 'font-bold' : ''}
                                       ${userAnswers[wordIndex] !== undefined ? (userAnswers[wordIndex].correct ? 'text-green-500' : 'text-red-500') : ''}`

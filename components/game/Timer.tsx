@@ -6,7 +6,7 @@ function Timer({time, className} : {
     className ?: string
 }) {
     return (
-      <Typography color="indigo" variant="h3" className={className}>{time} seconds</Typography>
+      <Typography color="indigo" variant="h3" className={className}>{time}s</Typography>
     );
 }
 

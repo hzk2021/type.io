@@ -9,10 +9,12 @@ module.exports = withMT({
   ],
   theme: {
     extend: {
-
+      fontSize: {
+        clamp: "clamp(1.5rem, 3vw, 2rem)"
+      }
     },
     screens: {
-      'sm': '545px'
+      'sm': '650px'
     }
   },
   plugins: [],

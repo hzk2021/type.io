@@ -50,7 +50,7 @@ A typing game for everyone! Players can submit high scores to compare their word
 
 ![Desktop](./readme-assets/typeIO-mobile.png)
 
-## Instruction (if you're interested in running it)
+## Instruction (if you're trying to replicate)
 
 Populate .env file locally
 

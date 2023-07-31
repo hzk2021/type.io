@@ -19,11 +19,11 @@
 
 ## Description
 
-A typing game for everyone! Players can submit high scores to compare their word per minute (WPM) with one another. Built using some of the latest and upcoming technologies listed below.
+A typing game for everyone! Players can submit high scores to compare their words per minute (WPM) with one another. Built using some of the latest and upcoming technologies listed below.
 
 ## Built Using
 
-- NextJS <img height="16" width="16" src="https://cdn.simpleicons.org/react" />
+- NextJS <img height="16" width="16" src="https://cdn.simpleicons.org/next.js" />
 - TypeScript <img height="16" width="16" src="https://cdn.simpleicons.org/typescript" />
 - MongoDB <img height="16" width="16" src="https://cdn.simpleicons.org/mongodb" />
 - Mongoose <img height="16" width="16" src="https://cdn.simpleicons.org/mongoose" />
@@ -49,3 +49,23 @@ A typing game for everyone! Players can submit high scores to compare their word
 #### Mobile
 
 ![Desktop](./readme-assets/typeIO-mobile.png)
+
+## Instruction (if you're interested in running it)
+
+Populate .env file locally
+
+- MONGO_DATABASE_USER
+- MONGO_DATABASE_PASSWORD
+- GOOGLE_CLIENT_ID
+- GOOGLE_CLIENT_SECRET
+- MONGODB_URI
+- NEXTAUTH_URL
+- NEXTAUTH_URL_INTERNAL
+- NEXTAUTH_SECRET
+- NEXT_PUBLIC_SECRET
+- NEXT_PUBLIC_URI_IDENTIFIER
+
+```
+# npm i
+# npm run dev
+```

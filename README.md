@@ -39,6 +39,7 @@ A typing game for everyone! Players can submit high scores to compare their word
 #### Other
 
 - [ESLint](https://eslint.org/)
+- [Prettier](https://prettier.io/)
 
 ## Preview
 

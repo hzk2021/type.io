@@ -1,34 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align=center>
+	<h1>Type.IO
+	<br>
+		<img src="https://img.shields.io/static/v1?label=&message=NextJS&color=000000&style=for-the-badge&logo=next.js&logoColor=white&logoWidth=&labelColor=&link=">
+		<img src="https://img.shields.io/static/v1?label=&message=TypeScript&color=3178C6&style=for-the-badge&logo=typescript&logoColor=white&logoWidth=&labelColor=&link=">
+		<img src="https://img.shields.io/static/v1?label=&message=MongoDB&color=47A248&style=for-the-badge&logo=mongodb&logoColor=white&logoWidth=&labelColor=&link=">
+		<img src="https://img.shields.io/static/v1?label=&message=Mongoose&color=880000&style=for-the-badge&logo=mongoose&logoColor=white&logoWidth=&labelColor=&link=">
+		<img src="https://img.shields.io/static/v1?label=&message=material UI&color=007FFF&style=for-the-badge&logo=mui&logoColor=white&logoWidth=&labelColor=&link=">
+		<img src="https://img.shields.io/static/v1?label=&message=OAuth 2.0&color=4285F4&style=for-the-badge&logo=google&logoColor=white&logoWidth=&labelColor=&link=">
+		<img src="https://img.shields.io/static/v1?label=&message=Fontawesome&color=528DD7&style=for-the-badge&logo=fontawesome&logoColor=white&logoWidth=&labelColor=&link=">
+		<img src="https://img.shields.io/static/v1?label=&message=TailwindCSS&color=06B6D4&style=for-the-badge&logo=tailwindcss&logoColor=white&logoWidth=&labelColor=&link=">
+		<img src="https://img.shields.io/static/v1?label=&message=ESLint&color=4B32C3&style=for-the-badge&logo=eslint&logoColor=white&logoWidth=&labelColor=&link=">
+		<br>
+	</h1>
+	<h3><b><a href="https://type-io-ashen.vercel.app/">View Live Demo</a></b></h3>
+</div>
 
-## Getting Started
+![Gif of Project](./readme-assets/typeio.gif)
 
-First, run the development server:
+## Description
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+A typing game for everyone! Players can submit high scores to compare their word per minute (WPM) with one another. Built using some of the latest and upcoming technologies listed below.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Built Using
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- NextJS <img height="16" width="16" src="https://cdn.simpleicons.org/react" />
+- TypeScript <img height="16" width="16" src="https://cdn.simpleicons.org/typescript" />
+- MongoDB <img height="16" width="16" src="https://cdn.simpleicons.org/mongodb" />
+- Mongoose <img height="16" width="16" src="https://cdn.simpleicons.org/mongoose" />
+- Material UI <img height="16" width="16" src="https://cdn.simpleicons.org/mui" />
+- Tailwind CSS <img height="16" width="16" src="https://cdn.simpleicons.org/tailwindcss" />
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+#### Libraries
 
-## Learn More
+- [NextAuth](https://next-auth.js.org/)
+- [Google OAuth](https://developers.google.com/identity/protocols/oauth2)
+- [Font Awesome](https://fontawesome.com/v5/docs/web/use-with/react)
 
-To learn more about Next.js, take a look at the following resources:
+#### Other
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [ESLint](https://eslint.org/)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Preview
 
-## Deploy on Vercel
+#### Desktop
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![Desktop](./readme-assets/typeIO.png)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+#### Mobile
+
+![Desktop](./readme-assets/typeIO-mobile.png)
